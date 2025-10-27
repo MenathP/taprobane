@@ -113,6 +113,15 @@
         display: block !important;
         color: inherit !important;
     }
+    /* Place the intro mask logo below the welcome text and size it responsively */
+    #intro-mask .preloader-content .logo-below {
+        display: block;
+        margin: 12px auto 0 auto;
+        max-height: 420px;
+        max-width: 90%;
+        width: auto;
+        height: auto;
+    }
     </style>
     <!-- https://static9.cdn.ubi.com/resource/en-US/game/watchdogs/watchdogs/image-0_96921.jpg -->
 </head>
@@ -196,21 +205,42 @@
         <script>
         (function(){
             // Ensure the intro mask logo uses the site main image instead of the 1x1 placeholder.
-            // Set both maxWidth and maxHeight and keep width/height auto to preserve aspect ratio.
+            // Instead of relying on the template's position, place the logo under the welcome text
+            // so it appears beneath the "welcome to Taprobane empire" paragraph.
             function setIntroLogo(){
-                var img = document.querySelector('#intro-mask .logo');
-                if(img){
-                    img.src = 'images/main.png';
-                    // Triple the previous max height (approx three times bigger)
-                    img.style.maxHeight = '420px';
-                    img.style.maxWidth = '90%';
-                    img.style.width = 'auto';
-                    img.style.height = 'auto';
-                    img.style.display = 'block';
-                    img.style.margin = '0 auto';
-                    return true;
+                var inner = document.querySelector('#intro-mask .inner');
+                var pre = document.querySelector('#intro-mask .preloader-content');
+                if(!inner || !pre) return false;
+
+                // Remove any existing logo (often injected as a placeholder before the preloader-content)
+                var existing = inner.querySelector('.logo');
+                if(existing){
+                    try{ existing.parentNode.removeChild(existing); }catch(e){}
                 }
-                return false;
+
+                // If we've already inserted a below-logo, leave it in place
+                if(pre.querySelector('.logo-below')) return true;
+
+                // Create the image element and insert it immediately after the welcome paragraph
+                var p = pre.querySelector('p');
+                var img = document.createElement('img');
+                img.className = 'logo logo-below';
+                img.src = 'images/main.png';
+                img.alt = 'Taprobane logo';
+                img.style.maxHeight = '420px';
+                img.style.maxWidth = '90%';
+                img.style.width = 'auto';
+                img.style.height = 'auto';
+                img.style.display = 'block';
+                img.style.margin = '12px auto 0 auto';
+
+                if(p && p.parentNode){
+                    p.parentNode.insertBefore(img, p.nextSibling);
+                } else {
+                    pre.appendChild(img);
+                }
+
+                return true;
             }
             // Try immediately (if template already rendered), otherwise after DOMContentLoaded or load.
             if(!setIntroLogo()){
