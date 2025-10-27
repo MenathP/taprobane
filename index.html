@@ -78,6 +78,19 @@
         #header .ctos-logo.text-logo,
         #preloader .load-header .ctos-logo.text-logo { font-size: 1.6rem; left: 22px; }
     }
+    /* On small screens, ensure the preloader uses the sprite image (hide the text) so the loading logo is visible */
+    @media all and (max-width: 639px) {
+        #preloader .load-header .ctos-logo.text-logo {
+            text-indent: -119988px !important; /* hide text and show sprite */
+            background: url("images/sprites.png") no-repeat 0 0 !important;
+            display: block;
+            height: 22px;
+            width: 110px;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
     </style>
     <!-- https://static9.cdn.ubi.com/resource/en-US/game/watchdogs/watchdogs/image-0_96921.jpg -->
 </head>
