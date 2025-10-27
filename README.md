@@ -4,7 +4,7 @@ Taprobane Empire is a global business consultancy built on experience, strategy,
 
 We partner with companies worldwide to strengthen operations, drive growth, and unlock lasting value through intelligent, data-driven solutions.
 
-This website was built from the ground up by Meanth Perera.
+Built by Meanth Perera.
 
 ## Viewing the site locally
 
