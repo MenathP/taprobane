@@ -6227,3 +6227,40 @@ body.direct-form {
 .hidden {
     display: none !important;
 }
+
+/* High-specificity override: ensure the visible text logo is always shown
+   even if earlier sprite rules exist in the stylesheet or runtime scripts
+   attempt to hide it. Targets only elements with the `text-logo` class so
+   other sprite usages remain intact. */
+#header .ctos-logo.text-logo,
+#preloader .load-header .ctos-logo.text-logo,
+#header .blume-logo-wrapper .blume-logo.text-logo {
+    text-indent: 0 !important;
+    background: none !important;
+    background-image: none !important;
+    overflow: visible !important;
+    display: block !important;
+    height: auto !important;
+    width: auto !important;
+    position: absolute !important;
+    left: 22px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    font-size: 2.2rem !important;
+    font-family: "HelveticaNeueW01-65Medi", Arial, Sans !important;
+    color: inherit !important;
+    text-transform: lowercase !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+}
+
+@media all and (max-width: 639px) {
+    #header .ctos-logo.text-logo,
+    #preloader .load-header .ctos-logo.text-logo {
+        font-size: 1.6rem !important;
+        left: 22px !important;
+    }
+}
+
