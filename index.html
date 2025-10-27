@@ -193,6 +193,62 @@
             }
         })();
         </script>
+            <script>
+            (function(){
+                // Ensure the visible text logo is always shown in header and preloader.
+                // This guards against stylesheet sprite rules or runtime scripts that hide the text.
+                function ensureTextLogo(){
+                    var els = document.querySelectorAll('.ctos-logo.text-logo');
+                    if(!els) return;
+                    els.forEach(function(el){
+                        try{
+                            // If anchor exists, make sure its text reads exactly 'taprobane'
+                            var a = el.querySelector('a');
+                            if(a){
+                                if(a.textContent.trim().toLowerCase() !== 'taprobane') a.textContent = 'taprobane';
+                                a.style.color = 'inherit';
+                                a.style.textDecoration = 'none';
+                            } else {
+                                // no anchor — set text node
+                                el.textContent = 'taprobane';
+                            }
+
+                            // Force inline styles to override sprite-based CSS (use important)
+                            el.style.setProperty('text-indent', '0', 'important');
+                            el.style.setProperty('background', 'none', 'important');
+                            el.style.setProperty('background-image', 'none', 'important');
+                            el.style.setProperty('overflow', 'visible', 'important');
+                            el.style.setProperty('display', 'block', 'important');
+                            el.style.setProperty('white-space', 'nowrap', 'important');
+                            el.style.color = 'inherit';
+                            // Ensure it's vertically centered (mirrors the inline CSS rules)
+                            el.style.position = 'absolute';
+                            el.style.left = '22px';
+                            el.style.top = '50%';
+                            el.style.transform = 'translateY(-50%)';
+                            el.style.fontSize = el.style.fontSize || (window.innerWidth < 640 ? '1.6rem' : '2.2rem');
+                        }catch(e){}
+                    });
+                    return els.length>0;
+                }
+
+                // Try immediately, then on DOMContentLoaded, window load, and periodically for a short window
+                if(!ensureTextLogo()){
+                    document.addEventListener('DOMContentLoaded', function(){ setTimeout(ensureTextLogo, 150); });
+                    window.addEventListener('load', function(){ setTimeout(ensureTextLogo, 200); });
+                    // Listen for the site's custom preloader events if the global `ib` object exists
+                    if(window.ib && ib.Events){
+                        try{ document.addEventListener('ib:preloader-ready', ensureTextLogo); }catch(e){}
+                        // also bind to the library's event bus if available
+                        try{ window.addEventListener && window.addEventListener('load', ensureTextLogo); }catch(e){}
+                    }
+                    // a few timed retries to handle async template injection
+                    setTimeout(ensureTextLogo, 500);
+                    setTimeout(ensureTextLogo, 1200);
+                    setTimeout(ensureTextLogo, 2500);
+                }
+            })();
+            </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6009e01c07df47a39293b828e1a59b94","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 
