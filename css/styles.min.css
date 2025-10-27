@@ -6264,3 +6264,12 @@ body.direct-form {
     }
 }
 
+/* Ensure the preloader header is visible immediately on initial load so the
+   text logo is the first thing shown on the loading screen. This overrides
+   the earlier rule that hid the preloader header. */
+#preloader .load-header {
+    display: block !important;
+    z-index: 99999 !important;
+    opacity: 1 !important;
+}
+
