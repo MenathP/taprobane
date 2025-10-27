@@ -219,6 +219,21 @@
                 // Also try again later in case the template is injected asynchronously
                 setTimeout(setIntroLogo, 800);
             }
+            // Robustness: observe the document for injection of the intro mask and set the logo
+            // immediately when it appears (covers cases where templates are injected later).
+            (function watchIntroMask(){
+                if(window.MutationObserver){
+                    var obs = new MutationObserver(function(mutations, observer){
+                        if(setIntroLogo()){
+                            // intro logo set; stop observing
+                            observer.disconnect();
+                        }
+                    });
+                    obs.observe(document.documentElement || document.body, { childList: true, subtree: true });
+                    // also give one final timed attempt and disconnect shortly after
+                    setTimeout(function(){ if(setIntroLogo()) obs.disconnect(); }, 2000);
+                }
+            })();
         })();
         </script>
             <script>
