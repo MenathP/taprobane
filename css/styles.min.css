@@ -526,13 +526,15 @@ body.direct-form {
 }
 
 #preloader .load-header .ctos-logo {
-    text-indent: -119988px;
-    overflow: hidden;
+    /* Show text logo instead of sprite */
+    text-indent: 0;
+    overflow: visible;
     text-align: left;
-    background: url("../images/sprites.png") no-repeat 0 0;
+    background: none;
+    background-image: none;
     display: block;
-    height: 22px;
-    width: 110px;
+    height: auto;
+    width: auto;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
     margin-top: 21px;
@@ -642,13 +644,15 @@ body.direct-form {
 }
 
 #header .ctos-logo {
-    text-indent: -119988px;
-    overflow: hidden;
+    /* Show text logo instead of sprite */
+    text-indent: 0;
+    overflow: visible;
     text-align: left;
-    background: url("../images/sprites.png") no-repeat 0 0;
+    background: none;
+    background-image: none;
     display: block;
-    height: 22px;
-    width: 110px;
+    height: auto;
+    width: auto;
     cursor: pointer;
     margin-top: 21px;
     margin-left: 22px
@@ -794,15 +798,17 @@ body.direct-form {
 }
 
 #header .blume-logo-wrapper .blume-logo {
-    text-indent: -119988px;
-    overflow: hidden;
+    /* Prefer visible text/logo instead of sprite image */
+    text-indent: 0;
+    overflow: visible;
     text-align: left;
-    background-image: url("../images/logo-sprites.png");
+    background: none;
+    background-image: none;
     height: 66px;
     cursor: pointer;
     left: 0;
     top: 0;
-    width: 124px
+    width: auto
 }
 
 #header .blume-logo-wrapper span {
