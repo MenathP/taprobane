@@ -113,6 +113,12 @@
         display: block !important;
         color: inherit !important;
     }
+    /* On small screens we prefer the main header logo — hide the pinned preloader logo to avoid duplicates */
+    @media all and (max-width: 639px) {
+        #preloader .load-header .ctos-logo.text-logo { display: none !important; }
+        /* ensure header logo remains visible */
+        #header .ctos-logo.text-logo { display: block !important; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); }
+    }
     /* Place the intro mask logo below the welcome text and size it responsively */
     #intro-mask .preloader-content .logo-below {
         display: block;
@@ -121,6 +127,22 @@
         max-width: 90%;
         width: auto;
         height: auto;
+    }
+
+    /* Mobile: hide preloader/header duplicate logo so only the site header logo shows */
+    @media all and (max-width: 639px) {
+        /* Hide the preloader's text-logo (left side) on phones */
+        #preloader .load-header .ctos-logo.text-logo {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        /* Also ensure any fixed-position logo from the preloader is hidden */
+        #preloader .load-header .ctos-logo.text-logo[style] {
+            display: none !important;
+        }
+        /* If needed, reduce header logo size to avoid overlap */
+        #header .ctos-logo.text-logo { font-size: 1.6rem !important; left: 16px !important; }
     }
     </style>
     <!-- https://static9.cdn.ubi.com/resource/en-US/game/watchdogs/watchdogs/image-0_96921.jpg -->
